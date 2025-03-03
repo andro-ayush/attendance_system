@@ -1,11 +1,9 @@
 import 'dart:io';
-import 'package:attendence_system/Login.dart';
 import 'package:attendence_system/Usertype.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
 import 'package:tflite_flutter/tflite_flutter.dart';
-import 'package:path_provider/path_provider.dart';
 import 'database.dart';
 class AdminPage extends StatefulWidget {
   const AdminPage({super.key});
@@ -21,8 +19,9 @@ class _AdminPageState extends State<AdminPage> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("Admin", style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color.fromARGB(255, 22, 150, 163),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         toolbarHeight: 60,
       ),
       body: Padding(
@@ -38,11 +37,12 @@ class _AdminPageState extends State<AdminPage> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(screenWidth / 1.1, 50),
-                backgroundColor: const Color.fromARGB(255, 242, 255, 227),
-                foregroundColor: Colors.black,
-              ),
-              child: const Text("View Records"),
+                shadowColor: Theme.of(context).colorScheme.secondary,
+                  minimumSize: Size(screenWidth / 1.1, 50),
+                  //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  //foregroundColor: Colors.white
+                  ),
+              child: Text("View Records",style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -52,12 +52,13 @@ class _AdminPageState extends State<AdminPage> {
                   MaterialPageRoute(builder: (context) => MarkAttendencePage()),
                 );
               },
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(screenWidth / 1.1, 50),
-                backgroundColor: const Color.fromARGB(255, 242, 255, 227),
-                foregroundColor: Colors.black,
-              ),
-              child: const Text("Mark Attendance"),
+             style: ElevatedButton.styleFrom(
+                shadowColor: Theme.of(context).colorScheme.secondary,
+                  minimumSize: Size(screenWidth / 1.1, 50),
+                  //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  //foregroundColor: Colors.white
+                  ),
+              child: Text("Mark Attendance",style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -68,11 +69,12 @@ class _AdminPageState extends State<AdminPage> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(screenWidth / 1.1, 50),
-                backgroundColor: const Color.fromARGB(255, 242, 255, 227),
-                foregroundColor: Colors.black,
-              ),
-              child: const Text("Approve Leave"),
+                shadowColor: Theme.of(context).colorScheme.secondary,
+                  minimumSize: Size(screenWidth / 1.1, 50),
+                  //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  //foregroundColor: Colors.white
+                  ),
+              child: Text("Approve Leave Requests",style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -83,11 +85,12 @@ class _AdminPageState extends State<AdminPage> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(screenWidth / 1.1, 50),
-                backgroundColor: const Color.fromARGB(255, 242, 255, 227),
-                foregroundColor: Colors.black,
-              ),
-              child: const Text("Register New Employee"),
+                shadowColor: Theme.of(context).colorScheme.secondary,
+                  minimumSize: Size(screenWidth / 1.1, 50),
+                  //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  //foregroundColor: Colors.white
+                  ),
+              child: Text("Register New Employee",style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -98,11 +101,12 @@ class _AdminPageState extends State<AdminPage> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(screenWidth / 1.1, 50),
-                backgroundColor: const Color.fromARGB(255, 242, 255, 227),
-                foregroundColor: Colors.black,
-              ),
-              child: const Text("Log out"),
+                shadowColor: Theme.of(context).colorScheme.secondary,
+                  minimumSize: Size(screenWidth / 1.1, 50),
+                  //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  //foregroundColor: Colors.white
+                  ),
+              child: Text("Log out",style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
             ),
           ],
         ),
@@ -180,17 +184,14 @@ Future<List<double>?> _getFaceEmbedding(File image) async {
 
   final outputBuffer = List.generate(1, (i) => List.filled(512, 0.0));
 
-  if (_interpreter == null) {
-    print("Error: Interpreter not initialized!");
-    return null;
-  }
+  // if (_interpreter == null) {
+  //   print("Error: Interpreter not initialized!");
+  //   return null;
+  // }
 
   _interpreter.run(inputBuffer, outputBuffer);
   return outputBuffer[0]; // Returns a 512-dimensional embedding
 }
-
-
-
 
   void _registerEmployee() async {
     if (_nameController.text.isNotEmpty && _eidController.text.isNotEmpty && _faceEmbedding != null) {
@@ -230,15 +231,20 @@ Future<List<double>?> _getFaceEmbedding(File image) async {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Register Employee")),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text("Register New Employee", style: TextStyle(color: Colors.white)),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
+        toolbarHeight: 60,
+      ),
       body: Column(
         children: [
           TextField(controller: _nameController, decoration: InputDecoration(labelText: "Employee Name")),
           TextField(controller: _eidController, decoration: InputDecoration(labelText: "Employee ID")),
           TextField(controller: _passwordController, decoration: InputDecoration(labelText: "Password")),
-          ElevatedButton(onPressed: _captureFace, child: Text("Capture Face")),
+          ElevatedButton(onPressed: _captureFace, child: Text("Capture Face",style: TextStyle(color: Theme.of(context).colorScheme.secondary),)),
           _faceImage != null ? Image.file(_faceImage!, height: 100) : Container(),
-          ElevatedButton(onPressed: _registerEmployee, child: Text("Register")),
+          ElevatedButton(onPressed: _registerEmployee, child: Text("Register",style: TextStyle(color: Theme.of(context).colorScheme.secondary),)),
         ],
       ),
     );
@@ -284,9 +290,10 @@ void _markAttendance() async {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("Mark Attendance", style: TextStyle(color: Colors.white)),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         toolbarHeight: 60,
-        backgroundColor: const Color.fromARGB(255, 22, 150, 163),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -315,7 +322,7 @@ void _markAttendance() async {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: _markAttendance,
-              child: const Text("Mark Attendance"),
+              child: Text("Mark Attendance",style: TextStyle(color: Theme.of(context).colorScheme.secondary)),
             ),
           ],
         ),
@@ -333,10 +340,11 @@ class ApproveLeavePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Approve Leave", style: TextStyle(color: Colors.white)),
+       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text("Approve Leave Requests", style: TextStyle(color: Colors.white)),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         toolbarHeight: 60,
-        backgroundColor: const Color.fromARGB(255, 22, 150, 163),
       ),
       body: const Center(child: Text("Here you can approve leave requests")),
     );
@@ -423,8 +431,9 @@ class _ViewRecordsPageState extends State<ViewRecordsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("View Records", style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color.fromARGB(255, 22, 150, 163),
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         toolbarHeight: 60,
       ),
       body: employees.isEmpty

@@ -76,14 +76,15 @@ class _LoginPageState extends State<LoginPage> {
                         height: 60,
                         width: MediaQuery.of(context).size.width / 1.1,
                         decoration: BoxDecoration(
+                          border: Border.all(width: 2,color: Theme.of(context).colorScheme.tertiary),
                           borderRadius: BorderRadius.circular(20),
-                          color: const Color.fromARGB(255, 242, 255, 227),
+                          
                         ),
                         child: TextFormField(
                           controller: _usernamecontroller,
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(left: 20, top: 10),
-                            hintText: "Username",
+                            hintText: "EID/Username",
                             border: InputBorder.none,
                           ),
                         ),
@@ -94,8 +95,9 @@ class _LoginPageState extends State<LoginPage> {
                         height: 60,
                         width: MediaQuery.of(context).size.width / 1.1,
                         decoration: BoxDecoration(
+                          border:Border.all(width: 2,color: Theme.of(context).colorScheme.tertiary),
                           borderRadius: BorderRadius.circular(20),
-                          color: const Color.fromARGB(255, 242, 255, 227),
+                          
                         ),
                         child: TextFormField(
                           obscureText: true,
@@ -143,10 +145,12 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 22, 150, 163),
-                          foregroundColor: Colors.white,
-                        ),
-                        child: Text("Login"),
+                shadowColor: Theme.of(context).colorScheme.tertiary,
+                  minimumSize: Size(ScreenWidth / 1.1, 50),
+                  //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  //foregroundColor: Colors.white
+                  ),
+                        child: Text("Login",style: TextStyle(color: Theme.of(context).colorScheme.tertiary),),
                       ),
                     ],
                   ),
@@ -165,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                                 height: size,
                                 width: size,
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 34, 84, 121),
+                                  color: Theme.of(context).colorScheme.secondary,
                                   borderRadius: BorderRadius.circular(size / 2),
                                 ),
                               ),
@@ -184,7 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                                 height: size,
                                 width: size,
                                 decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 255, 140, 0),
+                                  color: Theme.of(context).colorScheme.tertiary,
                                   borderRadius: BorderRadius.circular(size / 2),
                                 ),
                               ),

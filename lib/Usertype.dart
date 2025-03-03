@@ -39,10 +39,12 @@ double ScreenWidth = MediaQuery.of(context).size.width;
                   ElevatedButton(onPressed: () { 
                   Navigator.pushNamed(context, '/login',arguments: 'Admin');},
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(ScreenWidth/1.1,50),
-                    backgroundColor: Color.fromARGB(255, 242, 255, 227)
+                  shadowColor: Theme.of(context).colorScheme.tertiary,
+                  minimumSize: Size(ScreenWidth / 1.1, 50),
+                  //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  //foregroundColor: Colors.white
                   ),           
-                  child: Text("Admin")),
+                  child: Text("Admin",style: TextStyle(color: Theme.of(context).colorScheme.tertiary),)),
               
                   SizedBox(height: 20,),
               
@@ -50,10 +52,12 @@ double ScreenWidth = MediaQuery.of(context).size.width;
                   ElevatedButton(onPressed: () { 
                     Navigator.pushNamed(context, '/login',arguments: 'Employee');},
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(ScreenWidth/1.1,50),
-                      backgroundColor: Color.fromARGB(255, 242, 255, 227)
-                    ),
-                    child: Text("Employee")),
+                    shadowColor: Theme.of(context).colorScheme.primary,
+                    minimumSize: Size(ScreenWidth / 1.1, 50),
+                    //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                    //foregroundColor: Colors.white
+                  ),
+                    child: Text("Employee",style: TextStyle(color: Theme.of(context).colorScheme.tertiary),)),
                 ],
               ),
             ),
@@ -69,13 +73,13 @@ double ScreenWidth = MediaQuery.of(context).size.width;
       curve: Curves.easeIn,
       builder: (context, size, child) {
         return Positioned(
-          bottom: -size / 3,
+          bottom: -size / 2.5,
           left: (ScreenWidth - size) / 2,
           child: Container(
             height: size,
             width: size,
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 172, 241, 240),
+              color: Theme.of(context).colorScheme.tertiary,
               borderRadius: BorderRadius.circular(size / 2),
             ),
           ),
@@ -90,13 +94,13 @@ double ScreenWidth = MediaQuery.of(context).size.width;
       curve: Curves.easeIn,
       builder: (context, size, child) {
         return Positioned(
-          bottom: -size / 2.5, 
+          bottom: -size / 1.9, 
           left: (ScreenWidth - size) / 2,
           child: Container(
             height: size,
             width: size,
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 22, 150, 163),
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(size / 2),
             ),
           ),

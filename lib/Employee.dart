@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:attendence_system/Admin.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
@@ -39,66 +38,71 @@ class _EmployeePageState extends State<EmployeePage> {
   Widget build(BuildContext context) {
     double ScreenWidth = MediaQuery.of(context).size.width;
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Employee", style: TextStyle(color: Colors.white)),
-          toolbarHeight: 60,
-          backgroundColor: Color.fromARGB(255, 22, 150, 163),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => MarkAttendancePage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                    minimumSize: Size(ScreenWidth / 1.1, 50),
-                    backgroundColor: Color.fromARGB(255, 242, 255, 227),
-                    foregroundColor: Colors.black),
-                child: Text("Mark Attendance"),
-              ),
-              SizedBox(height: 20),
-
-              // View Records button with eid passed to the next page
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ViewRecordsPage(eid: employeeEid ?? ''),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                    minimumSize: Size(ScreenWidth / 1.1, 50),
-                    backgroundColor: Color.fromARGB(255, 242, 255, 227),
-                    foregroundColor: Colors.black),
-                child: Text("View Records"),
-              ),
-              SizedBox(height: 20),
-
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => LeaveRequestPage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                    minimumSize: Size(ScreenWidth / 1.1, 50),
-                    backgroundColor: Color.fromARGB(255, 242, 255, 227),
-                    foregroundColor: Colors.black),
-                child: Text("Leave Request"),
-              ),
-              SizedBox(height: 20),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(" Employee", style: TextStyle(color: Colors.white)),
+        toolbarHeight: 60,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MarkAttendancePage()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                shadowColor: Theme.of(context).colorScheme.primary,
+                  minimumSize: Size(ScreenWidth / 1.1, 50),
+                  //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  //foregroundColor: Colors.white
+                  ),
+              child: Text("Mark Attendance"),
+            ),
+            SizedBox(height: 20),
+    
+            // View Records button with eid passed to the next page
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ViewRecordsPage(eid: employeeEid ?? ''),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                shadowColor: Theme.of(context).colorScheme.primary,
+                  minimumSize: Size(ScreenWidth / 1.1, 50),
+                  //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  //foregroundColor: Colors.white
+                  ),
+              child: Text("View Records"),
+            ),
+            SizedBox(height: 20),
+    
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LeaveRequestPage()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                shadowColor: Theme.of(context).colorScheme.primary,
+                  minimumSize: Size(ScreenWidth / 1.1, 50),
+                  //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  //foregroundColor: Colors.white
+                  ),
+              child: Text("Leave Request"),
+            ),
+            SizedBox(height: 20),
+          ],
         ),
       ),
     );
@@ -140,8 +144,9 @@ class _ViewRecordsPageState extends State<ViewRecordsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("View Records", style: TextStyle(color: Colors.white)),
-        backgroundColor: const Color.fromARGB(255, 22, 150, 163),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         toolbarHeight: 60,
       ),
       body: employees.isEmpty
@@ -175,6 +180,7 @@ class _MarkAttendancePageState extends State<MarkAttendancePage> {
   List<double>? _capturedEmbedding;
   String _message = "";
   Interpreter? _interpreter;
+  
 
   @override
   void initState() {
@@ -326,11 +332,29 @@ Future<void> _verifyFace() async {
 
   @override
   Widget build(BuildContext context) {
+
+  double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      appBar: AppBar(title: Text("Mark Attendance")),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text("View Records", style: TextStyle(color: Colors.white)),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        toolbarHeight: 60,
+      ),
       body: Column(
         children: [
-          ElevatedButton(onPressed: _captureAndRecognizeFace, child: Text("Scan Face")),
+          SizedBox(height: 20),
+
+          //
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                shadowColor: Theme.of(context).colorScheme.primary,
+                  minimumSize: Size(screenWidth / 1.1, 50),
+                  //backgroundColor: Theme.of(context).colorScheme.tertiary,
+                  //foregroundColor: Colors.white
+                  ),
+            onPressed: _captureAndRecognizeFace, child: Text("Scan Face")),
           _faceImage != null ? Image.file(_faceImage!, height: 100) : Container(),
           Text(_message),
         ],
@@ -340,12 +364,10 @@ Future<void> _verifyFace() async {
 
   @override
   void dispose() {
-    _interpreter?.close(); // Safely close if initialized
+    _interpreter?.close();
     super.dispose();
   }
 }
-
-
 
 
 // Class of LeaveRequestPage
@@ -355,13 +377,11 @@ class LeaveRequestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Leave Request", style: TextStyle(color: Colors.white)),
-          toolbarHeight: 60,
-          backgroundColor: Color.fromARGB(255, 22, 150, 163),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Leave Request", style: TextStyle(color: Colors.white)),
+        toolbarHeight: 60,
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
     );
   }
